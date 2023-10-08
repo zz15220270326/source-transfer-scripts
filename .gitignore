@@ -1,0 +1,19 @@
+.DS_Store
+
+node_modules
+
+dist
+
+yarn.lock
+
+*.mp4
+*.zip
+
+# origin
+# target
+
+logs/*
+
+dist
+
+.env
