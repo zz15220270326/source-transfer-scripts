@@ -9,7 +9,7 @@ module.exports = {
   entry: {
     'index': resolve(__dirname, 'src/scripts/index.ts'),
     'videoTransfer': resolve(__dirname, 'src/scripts/videoTransfer.ts'),
-    'audoTransfer': resolve(__dirname, 'src/scripts/audioTransfer.ts'),
+    'audioTransfer': resolve(__dirname, 'src/scripts/audioTransfer.ts'),
     'detail': resolve(__dirname, 'src/scripts/detail.ts'),
   },
 

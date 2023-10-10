@@ -5,7 +5,7 @@ import { getHtmlElement } from '../libs/utils';
 
 ;(() => {
   const init = () => {
-
+    
   }
 
   init();
