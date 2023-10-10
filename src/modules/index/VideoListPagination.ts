@@ -1,3 +1,4 @@
+import { getLocationHref, getQueryObject } from '../../libs/utils';
 import DomModule from '../DomModule';
 
 class VideoListPagination extends DomModule {
@@ -63,8 +64,13 @@ class VideoListPagination extends DomModule {
 
   private handleClickPageLink(el: HTMLElement) {
     const newPage = parseInt(el.getAttribute('data-index')) + 1;
+    const queryObject: Record<string, any> = getQueryObject(location.search);
 
-    location.href = `/?page=${newPage}&page_size=${this.pageSize}`;
+    location.href = getLocationHref('/', {
+      ...queryObject,
+      page: newPage,
+      page_size: this.pageSize,
+    });
   }
 
   private handleChangePageSize(el: HTMLElement) {}

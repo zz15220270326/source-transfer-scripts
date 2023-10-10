@@ -69,6 +69,36 @@ export function throttle<T extends Function>(fn: T, delay?: number) {
 }
 
 /**
+ * @function debounce
+ * @description 防抖函数
+ * @param {Function} fn 需要被防抖的函数
+ * @param {number|undefined} delay 防抖的延迟事件
+ * @return {Function} 返回一个被防抖的函数
+ */
+export function debounce<T extends Function>(fn: T, delay?: number) {
+  var _delay = typeof delay === 'number' && delay > 0 ? delay : 300;
+  var timer: NodeJS.Timeout | null = null;
+
+  return function (this: any) {
+    var args = arguments;
+    var ctx = this;
+
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+    timer = setTimeout(function() {
+      fn.apply(ctx, args);
+
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+    }, _delay);
+  }
+}
+
+/**
  * @function getHtmlElement
  * @description 根据标签符号获取 HTML 元素
  * @param {string | HTMLElement} selector 获取的标签符号
@@ -146,4 +176,20 @@ export function getLocationHref<T extends Record<string, any>>(path: string, que
   locationHref = locationHref.replace(/\&$/, '');
 
   return locationHref;
+}
+
+/**
+ * @function getQueryObject
+ * @description 获取搜索的 query 对象
+ * @param {string} search 当前的 search 字符串
+ * @return {Record<string, string>} 返回一个 query 对象
+ */
+export function getQueryObject(search: string): Record<string, string> {
+  const query: Record<string, string> = {};
+  const searchArr = search.substr(1).split('&');
+  searchArr.forEach((item) => {
+    const [key, value] = item.split('=');
+    query[key] = value;
+  });
+  return query;
 }
