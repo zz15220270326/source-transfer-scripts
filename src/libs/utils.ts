@@ -122,3 +122,28 @@ export function getUploadFilesContent(files: File[]): Promise<IUploadVideoObject
     });
   }));
 }
+
+/**
+ * @function getLocationHref
+ * @description 获取 location 跳转的地址
+ * @param {string} path 跳转的路径
+ * @param {object} query 跳转时需要传递的 query 参数
+ * @return {string} 返回跳转的路径
+ */
+export function getLocationHref<T extends Record<string, any>>(path: string, query?: T): string {
+  let locationHref = '';
+
+  // 添加 path
+  locationHref += path;
+
+  // 添加 query
+  locationHref += '?';
+  if (query) {
+    for (let k in query) {
+      locationHref += `${k}=${query[k]}&`;
+    }
+  }
+  locationHref = locationHref.replace(/\&$/, '');
+
+  return locationHref;
+}

@@ -68,6 +68,14 @@ class VideoListPagination extends DomModule {
   }
 
   private handleChangePageSize(el: HTMLElement) {}
+
+  public getPageInfo() {
+    const { page, pageSize } = this;
+    return {
+      page,
+      pageSize,
+    };
+  }
 }
 
 export default VideoListPagination;
