@@ -69,25 +69,25 @@ class BtnGroup extends DomModule {
         return;
       }
 
-      /* 上传单个文件测试 */
-      // for (let i = 0; i < uploadFilesContent.length; i++) {
-      //   const { file } = uploadFilesContent[i];
-
-      //   if (i === 0) {
-      //     console.log(file);
-      //     service.uploadVideoFile(file)
-      //       .then((res) => {
-      //         console.log(res);
-      //       });
-      //   }
-      // }
       const uploadName = this.oVideonameInput.value;
 
       service.uploadVideoFiles(uploadFilesContent, uploadName)
         .then(((res) => {
-          console.log('upload success');
-          window.alert(`上传成功 : ${JSON.stringify(res)}`);
-          this.uploader.resetUploader();
+          const { data, code, msg } = res;
+
+          if (code === 1) {
+            window.alert(msg);
+            return;
+          }
+          if (code === 0) {
+            window.alert(`上传成功 : ${JSON.stringify(data)}`);
+            const confirm = window.confirm(`是否需要清空上传内容？`);
+            if (confirm === true) {
+              this.uploader.resetUploader(); 
+            }
+          } else {
+            window.alert(`上传失败，原因：${msg}`);
+          }
         })
       );
     });

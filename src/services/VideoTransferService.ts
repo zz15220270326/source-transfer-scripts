@@ -27,7 +27,12 @@ class VideoTransferService extends HTTP {
     }));
     if (resList.every(item => item.code === 0)) {
       const confirm = window.confirm('上传成功，转换视频 ?（可能需要一些时间，请耐心等候）');
-      if (!confirm) return;
+      if (!confirm) {
+        return {
+          code: 1,
+          msg: '您取消了上传'
+        };
+      };
 
       const response = await this.createVideo(filename);
       return response as Record<string, any>;

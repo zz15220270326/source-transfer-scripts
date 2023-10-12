@@ -1,0 +1,23 @@
+.show-list-content {
+  width: 100%;
+
+  .file-nums {
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .show-list-table {
+    min-width: 600px;
+
+    th,
+    td {
+      height: 32px;
+      line-height: 32px;
+      box-shadow: 0 0 1px #ddd;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+  }
+}
