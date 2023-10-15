@@ -21,6 +21,23 @@
     box-shadow: 0 0 2px #d3d3d3;
     transition: all .25s ease-in;
 
+    .source-type {
+      margin-left: 3px;
+      padding: 3px 5px;
+      box-sizing: border-box;
+      border-radius: 3px;
+      background-color: #c2c2c2;
+      color: #fff;
+
+      &.type-audio {
+        background-color: #e32727;
+      }
+
+      &.type-video {
+        background-color: #5567f2;
+      }
+    }
+
     &:hover {
       background-color: #cecece;
       color: #fff;
@@ -49,5 +66,6 @@
     display: block;
     width: 100%;
     height: 100%;
+    max-height: 240px;
   }
 }
