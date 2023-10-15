@@ -41,7 +41,7 @@ class UploadManager {
     this.files = [];
     this.update(this.files, prevFiles);
     // this.uploader.outerHTML = this.uploader.outerHTML;
-    this.uploader.value = '';
+    this.uploader.value = null;
   }
 
   public submit(callback?: (files: File[]) => void) {

@@ -1,3 +1,5 @@
+import { getFormatTime } from '../libs/utils';
+
 export default function (header: string, content: string) {
   return `
     <!-- 显示头部 -->
@@ -36,7 +38,7 @@ export function showFileShowListContent(num: number, head: string, files: File[]
                 <tr>
                   <td>${name}</td>
                   <td>${webkitRelativePath || `-----/---/${name}`}</td>
-                  <td>${lastModified}</td>
+                  <td>${getFormatTime(lastModified)}</td>
                 </tr>
               `;
             }).join('\n')

@@ -8,11 +8,22 @@
   thead {
     border-bottom: 1px solid #ddd;
     box-sizing: border-box;
+
+    .list-table-row {
+      box-shadow: 1px 0 1px #dedede;
+      padding-left: 3px;
+    }
   }
 
   .list-table-row {
     height: 50px;
     line-height: 50px;
+  }
+
+  .list-table-head,
+  .list-table-data {
+    padding: 0 3px;
+    box-sizing: border-box;
   }
 
   .list-table-data {
