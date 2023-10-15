@@ -31,7 +31,7 @@ class SearchBar extends DomModule {
     const keyword = this.oSearchInput.value.trim();
     const { pageSize } = this.videoListPagination.getPageInfo();
 
-    location.href = getLocationHref('/', {
+    location.href = getLocationHref(location.pathname, {
       keyword,
       page: 1,
       page_size: pageSize,

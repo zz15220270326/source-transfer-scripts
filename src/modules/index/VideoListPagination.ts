@@ -66,7 +66,7 @@ class VideoListPagination extends DomModule {
     const newPage = parseInt(el.getAttribute('data-index')) + 1;
     const queryObject: Record<string, any> = getQueryObject(location.search);
 
-    location.href = getLocationHref('/', {
+    location.href = getLocationHref(location.pathname, {
       ...queryObject,
       page: newPage,
       page_size: this.pageSize,
