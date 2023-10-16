@@ -1,0 +1,10 @@
+.container-item {
+  margin: 5px;
+  padding: 15px;
+  box-sizing: border-box;
+  box-shadow: 1px 3px 5px #ddd;
+
+  &-title {
+    margin: 10px 0;
+  }
+}

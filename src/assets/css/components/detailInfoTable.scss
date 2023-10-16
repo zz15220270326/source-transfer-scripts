@@ -1,0 +1,34 @@
+.detail-info-table {
+  box-shadow: 0 0 0 1px #e8e8e8;
+  width: 100%;
+
+  &-head {
+    
+    &-row {
+      box-shadow: 0 0 1px #e8e8e8;
+
+      th {
+        height: 44px;
+        line-height: 44px;
+        user-select: none;
+        border-right: 1px solid #e8e8e8;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  &-body {
+
+    &-row {
+      box-shadow: 1px 0 1px #e8e8e8;
+
+      td {
+        height: 44px;
+        line-height: 44px;
+        user-select: none;
+        border-right: 1px solid #e8e8e8;
+        box-sizing: border-box;
+      }
+    }
+  }
+}
