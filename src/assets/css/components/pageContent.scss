@@ -13,21 +13,19 @@
   .inner {
     height: 100%;
     padding: 15px;
+    overflow: auto;
     box-sizing: border-box;
   }
 
   .page-list {
-    height: 100%;
-    overflow: auto;
-
-    @media (min-width: 768px) {
+    @media (min-width: 800px) {
       .page-list-item {
         width: 40%;
         margin-left: 5%;
       }
     }
 
-    @media (min-width: 1200px) {
+    @media (min-width: 1500px) {
       .page-list-item {
         width: 30%;
         margin-left: 3%;
@@ -36,8 +34,8 @@
 
     @media (min-width: 1600px) {
       .page-list-item {
-        width: 25%;
-        margin-left: 1%;
+        width: 23%;
+        margin-left: 1.5%;
       }
     }
 
@@ -46,6 +44,10 @@
       float: left;
       margin-bottom: 15px;
       box-shadow: 1px 3px 5px #ddd;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      animation: scroll 5s infinite linear;
 
       .page-cover {
         height: 250px;

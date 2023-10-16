@@ -12,9 +12,17 @@
   box-sizing: border-box;
   user-select: none;
 
-  h1 {
+  .page-title {
+    display: inline-block;
     font-size: 20px;
     font-weight: 400;
     color: #3c3c3c;
+  }
+
+  .page-logo {
+    display: inline-block;
+    margin-right: 10px;
+    position: relative;
+    top: 12px;
   }
 }
