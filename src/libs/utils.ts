@@ -197,7 +197,7 @@ export function getQueryObject(search: string): Record<string, string> {
 /**
  * 获取年份信息
  */
-export function getYMD(timestamp = Date.now()) {
+export function getDateInfo(timestamp = Date.now()) {
   const year = new Date(timestamp).getFullYear();
   const month = new Date(timestamp).getMonth() + 1;
   const dayOfMonth = new Date(timestamp).getDate();
@@ -230,6 +230,6 @@ export function isAddZero(num: number): string {
  * 获取格式化时间字符串
  */
 export function getFormatTime(timestamp = Date.now()) {
-  const { year, month, dayOfMonth, hour, minute, second } = getYMD(timestamp);
+  const { year, month, dayOfMonth, hour, minute, second } = getDateInfo(timestamp);
   return `${year}-${isAddZero(month)}-${isAddZero(dayOfMonth)} ${isAddZero(hour)}:${isAddZero(minute)}:${isAddZero(second)}`;
 }

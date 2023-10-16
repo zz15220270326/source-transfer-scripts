@@ -62,8 +62,8 @@ class Uploader extends DomModule {
         showFileShowListContent(
           newFiles.length,
           `
-            <th align="left" width="200px">文件名称</th>
-            <th align="left" width="360px">文件路径</th>
+            <th align="left" width="280px">文件名称</th>
+            <th align="left" width="360px">文件大小 （单位：MB）</th>
             <th align="left">最近修改时间</th>
           `,
           newFiles
