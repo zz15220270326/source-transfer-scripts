@@ -13,6 +13,7 @@
 
   .pagination-list {
     margin-right: 10px;
+    margin-bottom: 12px;
 
     li {
       height: 100%;
@@ -27,7 +28,7 @@
 
       &:hover,
       &.active {
-        background-color: #0099dd;
+        background-color: #409eff;
 
         .pagination-list-item-link {
           color: #fff;

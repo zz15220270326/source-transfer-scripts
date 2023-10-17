@@ -28,6 +28,10 @@
         user-select: none;
         border-right: 1px solid #e8e8e8;
         box-sizing: border-box;
+
+        img {
+          max-width: 600px;
+        }
       }
     }
   }
