@@ -77,16 +77,31 @@ class VideoListTable extends DomModule {
 
   private async handleRemoveBtnClick(el: HTMLElement) {
     const oTr = (el.parentNode?.parentNode) as HTMLElement;
-    const videoName = oTr
-      .getElementsByClassName('list-table-data')[0]
-      .getElementsByTagName('span')[0].innerText;
 
-    const isConfirm: boolean = window.confirm(`确定要删除电影 【${videoName}】 吗？`);
+    const id = oTr.getAttribute('data-id');
+    const sourceName = oTr.getAttribute('data-name');
+    const sourceType = oTr.getAttribute('data-type');
+
+    console.log({ id, sourceName, sourceType });
+
+    const isConfirm: boolean = window.confirm(`确定要删除电影 【${sourceName}】 吗？`);
         
     if (isConfirm) {
-      if (oTr) {
-        await indexService.removeVideo(videoName);
+      try {
+        switch (sourceType) {
+          case 'video':
+            await indexService.removeVideo(id);
+            break;
+          case 'audio':
+            await indexService.removeAudio(id);
+            break;
+          default:
+            break;
+        }
         location.reload();
+      } catch (e) {
+        const errMsg = e instanceof Error ? e.message : `${e}`;
+        window.alert(`删除失败 ：${errMsg}`);
       }
     }
   }
