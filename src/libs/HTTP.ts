@@ -5,7 +5,7 @@ class HTTP {
 
   constructor() {
     this.axios = Axios.create({
-      timeout: 60 * 1000,
+      timeout: 5 * 60 * 1000,
       headers: {},
     });
   }
