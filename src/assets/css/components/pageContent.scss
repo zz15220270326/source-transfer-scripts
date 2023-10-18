@@ -18,6 +18,14 @@
   }
 
   .page-list {
+    // 适配手机屏幕
+    @media(min-width: 0px) {
+      .page-list-item {
+        width: 80%;
+        margin-left: 10%;
+      }
+    }
+
     @media (min-width: 800px) {
       .page-list-item {
         width: 40%;
@@ -25,17 +33,17 @@
       }
     }
 
-    @media (min-width: 1500px) {
+    @media (min-width: 1700px) {
       .page-list-item {
         width: 30%;
         margin-left: 3%;
       }
     }
 
-    @media (min-width: 1600px) {
+    @media (min-width: 1850px) {
       .page-list-item {
-        width: 23%;
-        margin-left: 1.5%;
+        width: 20%;
+        margin-left: 5%;
       }
     }
 
