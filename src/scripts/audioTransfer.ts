@@ -2,7 +2,7 @@ import '../assets/css/reset.scss';
 import '../assets/css/audioTransfer.scss';
 
 import DomModule from '../modules/DomModule';
-import { SingleAudioUploader } from '../modules/audioTransfer';
+import { SingleAudioUploader, MultiAudioUploader } from '../modules/audioTransfer';
 
 import { getHtmlElement } from '../libs/utils';
 
@@ -13,10 +13,12 @@ import { getHtmlElement } from '../libs/utils';
   const oMultiAudioUploader = getHtmlElement('.J_MultiAudioUploadTransfer', oContainer);
 
   const singleAudioUploader = new SingleAudioUploader(oSingleAudioUploader);
+  const multiAudioUploader = new MultiAudioUploader(oMultiAudioUploader);
 
   const init = () => {
     DomModule.init([
       singleAudioUploader,
+      multiAudioUploader
     ]);
   }
 

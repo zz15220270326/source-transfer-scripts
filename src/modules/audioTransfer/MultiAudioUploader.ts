@@ -10,7 +10,8 @@ import AudioTransferSerivce from '../../services/AudioTransferService';
 
 const service = new AudioTransferSerivce();
 
-class SingleAudioUploader extends DomModule {
+
+class MultiAudioUploader extends DomModule {
   private el: HTMLElement;
 
   private oUploader: HTMLElement;
@@ -52,28 +53,27 @@ class SingleAudioUploader extends DomModule {
   }
 
   private handleUploadChange() {
-    const file = this.oUploadInput.files[0];
-    if (!file) return;
+    const { files } = this.oUploadInput;
+    if (!files.length) return;
 
     // 1. 把待上传的文件信息展示出来
     this.oFileShowList.innerHTML = FileShowList(
       showFileShowListHeader(`选择上传的文件：------`),
       showFileShowListContent(
-        1,
+        files.length,
         `
           <th align="left" width="200px">文件名称</th>
           <th align="left" width="360px">文件大小（单位：MB）</th>
           <th align="left">最近修改时间</th>
         `,
-        [file]
+        [...files]
       ),
     );
-
-    // 把名称设置到输入框
-    this.oAudioNameInput.value = file.name;
+    // 2. 把名称设置到输入框
+    this.oAudioNameInput.value = [...files].map(file => file.name).join('、');
   }
 
-  private handleBtnClick(ev: Event) {
+  protected handleBtnClick(ev: Event) {
     const e = ev || window.event;
     const el = e.target || e.srcElement;
 
@@ -89,21 +89,12 @@ class SingleAudioUploader extends DomModule {
     }
   }
 
-  private handleResetBtnClick() {
+  protected handleResetBtnClick() {
     this.handleReset();
   }
 
-  private handleReset() {
-    // 1. 清空 uploader 中的内容
-    this.oUploadInput.value = null;
-    // 2. 把输入的名称也设置为空
-    this.oAudioNameInput.value = '';
-    // 2. 把待上传的文件信息清空
-    this.oFileShowList.innerHTML = '';
-  }
-
-  private handleSubmitBtnClick() {
-    const files: File[] = [...this.oUploadInput.files];
+  protected handleSubmitBtnClick() {
+    const files = this.oUploadInput.files;
     const inputName = this.oAudioNameInput.value.trim();
     if (!files.length) {
       window.alert('请选择上传的文件！');
@@ -116,10 +107,18 @@ class SingleAudioUploader extends DomModule {
     this.handleSubmit(files);
   }
 
-  private async handleSubmit(files: File[]) {
+  protected handleReset() {
+    // 1. 清空 uploader 中的内容
+    this.oUploadInput.value = null;
+    // 2. 把输入的名称也设置为空
+    this.oAudioNameInput.value = '';
+    // 2. 把待上传的文件信息清空
+    this.oFileShowList.innerHTML = '';
+  }
+
+  protected async handleSubmit(files: FileList) {
     try {
-      const [file] = files;
-      const { code, msg, data } = await service.uploadAudioFile(file);
+      const { code, msg, data } = await service.uploadAudioFileList(files);
       if (!!code) {
         throw new Error(msg);
       }
@@ -133,4 +132,4 @@ class SingleAudioUploader extends DomModule {
   }
 }
 
-export default SingleAudioUploader;
+export default MultiAudioUploader;
