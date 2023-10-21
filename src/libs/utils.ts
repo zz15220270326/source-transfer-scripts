@@ -10,7 +10,7 @@ import { IUploadVideoObject } from "../types";
    * @return {void} 没有返回值
    */
 export function lazyLoadImg(
-  oImgItems: HTMLCollectionOf<HTMLElement>,
+  oImgItems: HTMLCollectionOf<HTMLElement> | HTMLElement[],
   clientHeight: number,
   scrollTop: number
 ): void {
