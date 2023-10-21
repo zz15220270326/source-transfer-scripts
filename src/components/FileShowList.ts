@@ -31,11 +31,12 @@ export function showFileShowListContent(num: number, head: string, files: File[]
         </thead>
         <tbody>
           ${
-            files.map(file => {
+            files.map((file, fileIdx) => {
               const { name, lastModified, size, webkitRelativePath } = file;
         
               return `
                 <tr>
+                  <td>${fileIdx + 1}</td>
                   <td>${name}</td>
                   <td>${(size / 1024 / 1024).toFixed(2)}</td>
                   <td>${getFormatTime(lastModified)}</td>
