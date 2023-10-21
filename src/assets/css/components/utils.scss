@@ -1,0 +1,6 @@
+@mixin ellipse {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  animation: scroll 5s infinite linear;
+}
