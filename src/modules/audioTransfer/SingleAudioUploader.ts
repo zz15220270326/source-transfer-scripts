@@ -1,5 +1,7 @@
 import AudioUploader from './AudioUploader';
 
+import { Modal } from '../common';
+
 import FileShowList, {
   showFileShowListContent,
   showFileShowListHeader
@@ -40,29 +42,70 @@ class SingleAudioUploader extends AudioUploader {
     const files: File[] = [...this.oUploadInput.files];
     const inputName = this.oAudioNameInput.value.trim();
     if (!files.length) {
-      window.alert('请选择上传的文件！');
+      Modal.create('warning', {
+        width: 300,
+        isShowCloseIcon: false,
+        title: '提示',
+        content: '请选择需要上传的文件',
+        okBtnText: '确定',
+        isShowCancelBtn: false
+      }).show();
       return;
     };
     if (!inputName) {
-      window.alert('上传的名称不能为空！');
+      Modal.create('warning', {
+        width: 300,
+        isShowCloseIcon: false,
+        title: '提示',
+        content: '上传的名称不能为空！',
+        okBtnText: '确定',
+        isShowCancelBtn: false
+      }).show();
       return;
     }
     this.handleSubmit(files);
   }
 
   private async handleSubmit(files: File[]) {
+    const loadingModal = Modal.create('info', {
+      width: 300,
+      title: '正在上传视频',
+      content: '请耐心等待 。。。',
+      isShowOkBtn: false,
+      isShowCancelBtn: false,
+      isShowCloseIcon: false,
+    });
     try {
+      loadingModal.show();
       const [file] = files;
       const { code, msg, data } = await service.uploadAudioFile(file);
+      loadingModal.hide();
       if (!!code) {
         throw new Error(msg);
       }
-      window.alert(`上传成功：${JSON.stringify(data)}`);
-      const confirm = window.confirm('是否需要清空数据？');
-      confirm && this.handleReset();
+      Modal.create('success', {
+        width: 320,
+        title: '上传成功',
+        content: `
+          <p>
+            上传内容：
+            ${data?.playUrl ? `<a href="${data?.playUrl}" target="_blank">点击音频链接</a>` : ''}
+          </p>
+          <p>是否需要清空上传内容？</p>
+        `,
+        okBtnText: '清除',
+        cancelBtnText: '不清除',
+        onOk: () => {
+          this.handleReset(); 
+        }
+      }).show();
     } catch (e) {
       const errMsg = e instanceof Error ? e.message : '未知错误';
-      window.alert(`上传失败，原因：${errMsg}`);
+      Modal.create('error', {
+        width: 360,
+        title: '上传失败',
+        content: errMsg,
+      });
     }
   }
 }

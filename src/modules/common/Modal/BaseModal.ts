@@ -65,7 +65,6 @@ abstract class BaseModal {
 
   protected constructor(userOptions: Partial<IModalOptions> = {}) {
     const { defaultOptions } = BaseModal;
-    console.log(userOptions);
     const options: IModalOptions = {
       ...defaultOptions,
       ...userOptions
@@ -125,6 +124,11 @@ abstract class BaseModal {
       default:
         break;
     }
+
+    // 在调用方法之后，定时删除原来的 dom 元素
+    setTimeout(() => {
+      this.destroy();
+    }, 2000);
   }
 }
 
