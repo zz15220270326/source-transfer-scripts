@@ -1,5 +1,7 @@
 import DomModule from '../DomModule';
 
+import { Modal } from '../common';
+
 import { lazyLoadImg, throttle } from '../../libs/utils';
 import IndexService from '../../services/IndexService';
 
@@ -82,28 +84,37 @@ class VideoListTable extends DomModule {
     const sourceName = oTr.getAttribute('data-name');
     const sourceType = oTr.getAttribute('data-type');
 
-    console.log({ id, sourceName, sourceType });
-
-    const isConfirm: boolean = window.confirm(`确定要删除电影 【${sourceName}】 吗？`);
-        
-    if (isConfirm) {
-      try {
-        switch (sourceType) {
-          case 'video':
-            await indexService.removeVideo(id);
-            break;
-          case 'audio':
-            await indexService.removeAudio(id);
-            break;
-          default:
-            break;
+    Modal.create('info', {
+      width: 500,
+      title: '删除确认',
+      content: `确定要删除电影 【${sourceName}】 吗？`,
+      onOk: async () => {
+        try {
+          switch (sourceType) {
+            case 'video':
+              await indexService.removeVideo(id);
+              break;
+            case 'audio':
+              await indexService.removeAudio(id);
+              break;
+            default:
+              break;
+          }
+          location.reload();
+        } catch (e) {
+          const errMsg = e instanceof Error ? e.message : `${e}`;
+          Modal.create('error', {
+            width: 500,
+            title: '删除失败了',
+            content: errMsg,
+            okBtnText: '知道了',
+            isShowCancelBtn: false
+          });
         }
-        location.reload();
-      } catch (e) {
-        const errMsg = e instanceof Error ? e.message : `${e}`;
-        window.alert(`删除失败 ：${errMsg}`);
-      }
-    }
+      },
+      okBtnText: '确定',
+      cancelBtnText: '取消'
+    }).show();
   }
 }
 

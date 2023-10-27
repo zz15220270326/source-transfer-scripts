@@ -1,6 +1,8 @@
 import DomModule from '../DomModule';
 import Uploader from './Uploader';
 
+import { Modal } from '../common';
+
 import {
   getHtmlElement,
   getUploadFilesContent
@@ -61,11 +63,25 @@ class BtnGroup extends DomModule {
     this.uploader.submitUploaderFiles(async (files) => {
       const uploadFilesContent = await getUploadFilesContent(files);
       if (!uploadFilesContent.length) {
-        window.alert('请选择需要上传的文件');
+        Modal.create('warning', {
+          width: 300,
+          isShowCloseIcon: false,
+          title: '提示',
+          content: '请选择需要上传的文件',
+          okBtnText: '确定',
+          isShowCancelBtn: false
+        }).show();
         return;
       };
       if (!this.oVideonameInput.value) {
-        window.alert('请填写上传视频的名称');
+        Modal.create('warning', {
+          width: 300,
+          isShowCloseIcon: false,
+          title: '提示',
+          content: '请填写上传视频的名称',
+          okBtnText: '确定',
+          isShowCancelBtn: false
+        }).show();
         return;
       }
 
@@ -76,17 +92,36 @@ class BtnGroup extends DomModule {
           const { data, code, msg } = res;
 
           if (code === 1) {
-            window.alert(msg);
+            Modal.create('error', {
+              width: 360,
+              title: '上传失败',
+              content: msg,
+            });
             return;
           }
           if (code === 0) {
-            window.alert(`上传成功 : ${JSON.stringify(data)}`);
-            const confirm = window.confirm(`是否需要清空上传内容？`);
-            if (confirm === true) {
-              this.uploader.resetUploader(); 
-            }
+            Modal.create('success', {
+              width: 320,
+              title: '上传成功',
+              content: `
+                <p>
+                  上传内容：
+                  ${data?.videoUrl ? `<a href="${data?.videoUrl}" target="_blank">点击视频链接</a>` : ''}
+                </p>
+                <p>是否需要清空上传内容？</p>
+              `,
+              okBtnText: '清除',
+              cancelBtnText: '不清除',
+              onOk: () => {
+                this.uploader.resetUploader(); 
+              }
+            }).show();
           } else {
-            window.alert(`上传失败，原因：${msg}`);
+            Modal.create('error', {
+              width: 360,
+              title: '上传失败',
+              content: msg,
+            });
           }
         })
       );
