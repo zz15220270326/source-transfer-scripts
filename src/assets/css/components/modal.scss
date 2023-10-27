@@ -1,0 +1,144 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: none;
+
+  &.info-modal {
+    
+    .modal-header {
+      background-color: #fff;
+      color: #3c3c3c;
+    }
+  }
+
+  &.error-modal {
+
+    .modal-header {
+      background-color: rgba(236, 23, 23, .5);
+      color: #fff;
+    }
+
+    .btn {
+      &.modal-ok-btn {
+        background-color: rgb(236, 23, 23);
+      }
+    }
+  }
+
+  &.success-modal {
+
+    .modal-header {
+      background-color: rgba(23, 236, 100, .5);
+      color: #fff;
+    }
+
+    .btn {
+      &.modal-ok-btn {
+        background-color: rgb(23, 236, 100);
+      }
+    }
+  }
+
+  &.warning-modal {
+    .modal-header {
+      background-color: rgba(255, 85, 0, .5);
+      color: #fff;
+    }
+
+    .btn {
+      &.modal-ok-btn {
+        background-color: rgb(255, 85, 0);
+      }
+    }
+  }
+
+  &.show {
+    display: block;
+  }
+
+  &-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    box-shadow: 1px 3px 5px #ddd;
+
+    @media (min-width: 0px) {
+      width: 70%;
+    }
+
+    @media (min-width: 768px) {
+      width: 60%;
+    }
+
+    @media (min-width: 1080px) {
+      width: 40%;
+    }
+  }
+
+  &-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+    line-height: 50px;
+    border-bottom: 1px solid #ddd;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  &-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+    line-height: 50px;
+    margin-top: 1px solid #ddd;
+    text-align: right;
+  }
+
+  &-title {
+    font-size: 18px;
+  }
+
+  &-close-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: all .25s;
+
+    &:hover {
+      opacity: .8;
+    }
+  }
+
+  &-content {
+    height: 100%;
+    padding: 60px 15px;
+    max-height: 600px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    font-size: 15px;
+  }
+
+  .btn {
+    padding: 10px 16px;
+    margin-right: 8px;
+
+    &.modal-ok-btn {
+      background-color: #0094ff;
+      color: #fff;
+    }
+  }
+}
