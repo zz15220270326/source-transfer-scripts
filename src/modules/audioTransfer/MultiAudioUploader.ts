@@ -69,7 +69,7 @@ class MultiAudioUploader extends AudioUploader {
   protected async handleSubmit(files: FileList) {
     const loadingModal = Modal.create('info', {
       width: 300,
-      title: '正在上传视频',
+      title: '正在转换音频',
       content: '请耐心等待 。。。',
       isShowOkBtn: false,
       isShowCancelBtn: false,
