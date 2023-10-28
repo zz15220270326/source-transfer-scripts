@@ -1,0 +1,52 @@
+.container {
+
+  .switch-tab {
+    position: relative;
+  }
+
+  .switch-tab-nav {
+    height: 44px;
+    line-height: 44px;
+
+    @media (min-width: 0px) {
+      width: 100%;
+    }
+    @media (min-width: 1200px) {
+      width: 30%;
+    }
+    @media (min-width: 1500px) {
+      width: 16%;
+    }
+
+    &::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    label {
+      cursor: pointer;
+    }
+
+    &-item {
+      float: left;
+      width: 50%;
+      padding-left: 5%;
+      box-sizing: border-box;
+    }
+  }
+
+  .tab-page-item {
+    position: absolute;
+    top: 50px;
+    left: 15px;
+    min-width: 360px;
+    opacity: 0;
+    transition: all .5s ease-in;
+    box-shadow: 0 0 3px #ddd;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+}
