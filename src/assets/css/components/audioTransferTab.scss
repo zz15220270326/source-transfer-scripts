@@ -42,11 +42,19 @@
     left: 15px;
     min-width: 360px;
     opacity: 0;
-    transition: all .5s ease-in;
+    transition: all .25s ease-in;
     box-shadow: 0 0 3px #ddd;
+
+    .audio-transfer-uploader, .btn-group {
+      display: none;
+    }
 
     &.active {
       opacity: 1;
+
+      .audio-transfer-uploader, .btn-group {
+        display: block;
+      }
     }
   }
 }

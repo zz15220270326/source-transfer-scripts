@@ -20,6 +20,8 @@
   }
 
   .page-list {
+    margin-top: 15px;
+
     // 适配手机屏幕
     @media(min-width: 0px) {
       .page-list-item {

@@ -63,8 +63,11 @@ class VideoListPagination extends DomModule {
   }
 
   private handleClickPageLink(el: HTMLElement) {
-    const newPage = parseInt(el.getAttribute('data-index')) + 1;
     const queryObject: Record<string, any> = getQueryObject(location.search);
+    const oldPage = parseInt(queryObject.page || '1');
+    const newPage = parseInt(el.getAttribute('data-index')) + 1;
+
+    if (oldPage === newPage) return;
 
     location.href = getLocationHref(location.pathname, {
       ...queryObject,
