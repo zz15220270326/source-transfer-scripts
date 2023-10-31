@@ -2,13 +2,15 @@ import DomModule from '../DomModule';
 
 import { Modal } from '../common';
 
-import { lazyLoadImg, throttle } from '../../libs/utils';
+import { getHtmlElement, lazyLoadImg, throttle } from '../../libs/utils';
 import IndexService from '../../services/IndexService';
 
 const indexService = new IndexService();
 
 class VideoListTable extends DomModule {
   private el: HTMLElement;
+
+  private oInner: HTMLElement;
 
   private oTableHead: HTMLElement;
 
@@ -40,18 +42,19 @@ class VideoListTable extends DomModule {
     this.oTableHead = this.el.querySelector('.list-table-head');
     this.oTableBody = this.el.querySelector('.list-table-body');
     this.oImgItems = this.oTableBody.getElementsByClassName('list-table-data') as HTMLCollectionOf<HTMLElement>;
+    this.oInner = getHtmlElement('.inner');
   }
 
   protected bindEvent(): void {
     // 容器滚动 - 图片懒加载
-    window.addEventListener('scroll', throttle(this.handleScroll.bind(this), 150), false);
+    this.oInner.addEventListener('scroll', throttle(this.handleScroll.bind(this), 150), false);
     // 点击表格
     this.el.addEventListener('click', this.handleElClick.bind(this), false);
   }
 
   handleScroll(e: Event) {
     const clientHeight = document.documentElement.clientHeight;
-    const scrollTop = document.documentElement.scrollTop;
+    const scrollTop = this.oInner.scrollTop || document.documentElement.scrollTop;
 
     lazyLoadImg(
       this.oImgItems,
@@ -73,8 +76,6 @@ class VideoListTable extends DomModule {
     if (tagName === 'button') {
       classList.includes('J_BtnOperateRemove') && this.handleRemoveBtnClick(tar);
     }
-
-    
   }
 
   private async handleRemoveBtnClick(el: HTMLElement) {

@@ -30,7 +30,10 @@ import DomModule from '../modules/DomModule';
     videoListPagination,
     searchBarTypeSelector
   );
-  const backTop = new BackTop(oBackTop);
+  const backTop = new BackTop(oBackTop, {
+    scrollElement: getHtmlElement('.inner'),
+    minHeight: 300
+  });
 
   const init = () => {
     DomModule.init([

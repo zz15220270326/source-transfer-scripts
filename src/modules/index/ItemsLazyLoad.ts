@@ -1,6 +1,6 @@
 import DomModule from '../DomModule';
 
-import { getHtmlElement, lazyLoadImg, throttle } from '../../libs/utils';
+import { getHtmlElement, lazyLoadImg, debounce } from '../../libs/utils';
 
 class ItemsLazyLoad extends DomModule {
   private el: HTMLElement;
@@ -26,10 +26,11 @@ class ItemsLazyLoad extends DomModule {
   }
 
   protected bindEvent(): void {
-    this.oInner.addEventListener('scroll', throttle(this.handleScroll.bind(this), 150), false);
+    this.oInner.addEventListener('scroll', debounce(this.handleScroll.bind(this), 150), false);
   }
 
   private handleScroll(e: Event): void {
+    console.log('scroll');
     const clientHeight = this.el.clientHeight;
     const scrollTop = this.oInner.scrollTop || document.body.scrollTop || document.documentElement.scrollTop;
 
