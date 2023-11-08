@@ -54,7 +54,7 @@ export function showNoDataTip(tip: string = '数据已被清空', showImg: boole
   return `
     <div class="no-data-tip">
       <h2>数据已被清空</h2>
-      ${ showImg ? '<img alt="" src="/imgs/lazyload.webp" width="600" />' : '' }
+      ${ showImg ? '<img alt="" src="//source-manage-cdn.bklove-zz.cn/imgs/lazyload.webp" width="600" />' : '' }
     </div>
   `;
 }
