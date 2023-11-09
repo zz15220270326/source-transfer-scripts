@@ -57,12 +57,19 @@
       box-shadow: 1px 3px 5px #ddd;
 
       .page-cover {
-        height: 250px;
         margin: 8px;
         border-bottom: 1px solid #ddd;
         border-radius: 3px;
         box-sizing: border-box;
         transition: all .25s ease-in;
+
+        @media (min-width: 0px) {
+          height: 250px;
+        }
+
+        @media (min-width: 1200px) {
+          height: 320px;
+        }
 
         a {
           img {
