@@ -5,20 +5,25 @@ import { Modal } from '../modules/common';
 
 class VideoTransferService extends HTTP {
   async uploadVideoFile(file: File) {
-    const formData = new FormData();
-    formData.append('file', file, file.name);
-
-    const response = await this.request({
-      method: 'POST',
-      url: '/videos/upload-file',
-      data: formData,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    });
-
-    return response.data;
+    try {
+      const formData = new FormData();
+      formData.append('file', file, file.name);
+  
+      const response = await this.request({
+        method: 'POST',
+        url: '/videos/upload-file',
+        data: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      });
+  
+      return response.data;
+    } catch (e) {
+      console.error(e);
+      return {};
+    }
   }
 
   async uploadVideoFiles(uploadObjectList: IUploadVideoObject[], filename = 'video') {
@@ -66,16 +71,21 @@ class VideoTransferService extends HTTP {
   }
 
   async createVideo(outputPath: string) {
-    const response = await this.request({
-      method: 'POST',
-      url: '/videos/transfer',
-      data: {
-        outputPath,
-        clear: true,
-      },
-    });
-
-    return response.data;
+    try {
+      const response = await this.request({
+        method: 'POST',
+        url: '/videos/transfer',
+        data: {
+          outputPath,
+          clear: true,
+        },
+      });
+  
+      return response.data;
+    } catch (e) {
+      console.error(e);
+      return {};
+    }
   }
 }
 
